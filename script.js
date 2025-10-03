@@ -8,7 +8,7 @@ const nameError = document.getElementById("nameError");
 const emailError = document.getElementById("emailError");
 const phoneError = document.getElementById("phoneError");
 
-// Validation functions
+// ✅ Validate Name
 function validateName() {
   if (nameInput.value.trim() === "") {
     showError(nameInput, nameError);
@@ -19,6 +19,7 @@ function validateName() {
   }
 }
 
+// ✅ Validate Email
 function validateEmail() {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!regex.test(emailInput.value.trim())) {
@@ -30,7 +31,9 @@ function validateEmail() {
   }
 }
 
+// ✅ Validate Phone
 function validatePhone() {
+  // Pattern: 123-456-7890 (you can change this to fit your format)
   const regex = /^\d{3}-\d{3}-\d{4}$/;
   if (!regex.test(phoneInput.value.trim())) {
     showError(phoneInput, phoneError);
@@ -41,25 +44,26 @@ function validatePhone() {
   }
 }
 
-// Show error
+// 🚨 Show error
 function showError(input, errorElement) {
-  input.classList.add("invalid");
-  input.classList.remove("valid");
+  input.classList.add("error");
+  input.classList.remove("success");
   errorElement.style.display = "block";
 }
 
-// Show success
+// ✅ Show success
 function showSuccess(input, errorElement) {
-  input.classList.remove("invalid");
-  input.classList.add("valid");
+  input.classList.remove("error");
+  input.classList.add("success");
   errorElement.style.display = "none";
 }
 
-// Real-time validation
+// 🔄 Real-time validation (while typing)
 nameInput.addEventListener("input", validateName);
 emailInput.addEventListener("input", validateEmail);
 phoneInput.addEventListener("input", validatePhone);
 
+// 📩 On form submit
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -71,9 +75,9 @@ form.addEventListener("submit", function (e) {
     alert("✅ Form submitted successfully!");
     form.reset();
 
-    // Remove success styles after reset
-    nameInput.classList.remove("valid");
-    emailInput.classList.remove("valid");
-    phoneInput.classList.remove("valid");
+    // Remove success borders after reset
+    nameInput.classList.remove("success");
+    emailInput.classList.remove("success");
+    phoneInput.classList.remove("success");
   }
 });
