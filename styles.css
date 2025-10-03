@@ -1,3 +1,4 @@
+/* Reset & base */
 * {
   margin: 0;
   padding: 0;
@@ -13,27 +14,39 @@ body {
   height: 100vh;
 }
 
-/* Container - bigger size */
+/* Form Container */
 .form-container {
   background-color: white;
-  padding: 40px 50px;
+  padding: 45px 50px;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  width: 450px;
+  width: 480px;
   animation: fadeIn 0.8s ease;
 }
 
+/* Form Title */
 h2 {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
   color: #333;
-  font-size: 26px;
+  font-size: 28px;
 }
 
-/* Floating label wrapper */
+/* Form group wrapper */
 .form-group {
   position: relative;
   margin-bottom: 25px;
+}
+
+/* Input */
+input {
+  width: 100%;
+  padding: 18px 14px 12px;
+  font-size: 18px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
 /* Floating label */
@@ -47,23 +60,7 @@ label {
   pointer-events: none;
 }
 
-input {
-  width: 100%;
-  padding: 18px 14px 12px;
-  font-size: 18px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-/* Input focus */
-input:focus {
-  border-color: #6c63ff;
-  box-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
-}
-
-/* Floating label when focused or typed */
+/* Label moves on focus or input */
 input:focus + label,
 input:not(:placeholder-shown) + label {
   top: -10px;
@@ -74,7 +71,13 @@ input:not(:placeholder-shown) + label {
   color: #6c63ff;
 }
 
-/* Error and success states */
+/* Focus effect */
+input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
+}
+
+/* Error and success borders */
 input.error {
   border-color: #e74c3c;
 }
@@ -83,6 +86,7 @@ input.success {
   border-color: #2ecc71;
 }
 
+/* Error message */
 .error-message {
   display: none;
   color: #e74c3c;
@@ -109,8 +113,33 @@ button:hover {
   background: linear-gradient(135deg, #5a67d8, #6b46c1);
 }
 
-/* Fade-in */
+/* Fade-in animation */
 @keyframes fadeIn {
-  from {opacity: 0; transform: translateY(-20px);}
-  to {opacity: 1; transform: translateY(0);}
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optional: add icons inside inputs for success/error */
+.form-group input.success::after {
+  content: "✔";
+  color: #2ecc71;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.form-group input.error::after {
+  content: "✖";
+  color: #e74c3c;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
 }
