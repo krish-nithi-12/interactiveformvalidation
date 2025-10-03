@@ -1,1 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #74ebd5, #9face6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Container */
+.form-container {
+  background-color: white;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 320px;
+  animation: fadeIn 0.8s ease;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* Floating label wrapper */
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* Floating label effect */
+label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  color: #888;
+  font-size: 14px;
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+input {
+  width: 100%;
+  padding: 14px 12px 10px;
+  font-size: 16px;
+  border: 1.8px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Input focus effect */
+input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 8px rgba(108, 99, 255, 0.3);
+}
+
+/* Floating label animation on focus or valid */
+input:focus + label,
+input:not(:placeholder-shown) + label {
+  top: -8px;
+  left: 10px;
+  font-size: 12px;
+  background: white;
+  padding: 0 5px;
+  color: #6c63ff;
+}
+
+/* Error and success states */
+input.error {
+  border-color: #e74c3c;
+}
+
+input.success {
+  border-color: #2ecc71;
+}
+
+.error-message {
+  display: none;
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 5px;
+  padding-left: 5px;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #5a67d8, #6b46c1);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
