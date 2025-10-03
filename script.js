@@ -1,83 +1,45 @@
-const form = document.getElementById("validationForm");
+document.getElementById('validationForm').addEventListener('submit', function (event) {
+    event.preventDefault();
 
-const nameInput = document.getElementById("name");
-const emailInput = document.getElementById("email");
-const phoneInput = document.getElementById("phone");
+    let formIsValid = true;
+    let nameError = document.getElementById('nameError');
+    let emailError = document.getElementById('emailError');
+    let phoneError = document.getElementById('phoneError');
+    
+    let name = document.getElementById('name').value;
+    let email = document.getElementById('email').value;
+    let phone = document.getElementById('phone').value;
 
-const nameError = document.getElementById("nameError");
-const emailError = document.getElementById("emailError");
-const phoneError = document.getElementById("phoneError");
+    if (name === '') {
+        formIsValid = false;
+        document.getElementById('name').classList.add('error');
+        nameError.style.display = 'inline';
+    } else {
+        document.getElementById('name').classList.remove('error');
+        nameError.style.display = 'none';
+    }
 
-// ✅ Validate Name
-function validateName() {
-  if (nameInput.value.trim() === "") {
-    showError(nameInput, nameError);
-    return false;
-  } else {
-    showSuccess(nameInput, nameError);
-    return true;
-  }
-}
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!email.match(emailPattern)) {
+        formIsValid = false;
+        document.getElementById('email').classList.add('error');
+        emailError.style.display = 'inline';
+    } else {
+        document.getElementById('email').classList.remove('error');
+        emailError.style.display = 'none';
+    }
 
-// ✅ Validate Email
-function validateEmail() {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!regex.test(emailInput.value.trim())) {
-    showError(emailInput, emailError);
-    return false;
-  } else {
-    showSuccess(emailInput, emailError);
-    return true;
-  }
-}
+    const phonePattern = /^\d{10}$/;
+    if (!phone.match(phonePattern)) {
+        formIsValid = false;
+        document.getElementById('phone').classList.add('error');
+        phoneError.style.display = 'inline';
+    } else {
+        document.getElementById('phone').classList.remove('error');
+        phoneError.style.display = 'none';
+    }
 
-// ✅ Validate Phone
-function validatePhone() {
-  // Pattern: 123-456-7890 (you can change this to fit your format)
-  const regex = /^\d{3}-\d{3}-\d{4}$/;
-  if (!regex.test(phoneInput.value.trim())) {
-    showError(phoneInput, phoneError);
-    return false;
-  } else {
-    showSuccess(phoneInput, phoneError);
-    return true;
-  }
-}
-
-// 🚨 Show error
-function showError(input, errorElement) {
-  input.classList.add("error");
-  input.classList.remove("success");
-  errorElement.style.display = "block";
-}
-
-// ✅ Show success
-function showSuccess(input, errorElement) {
-  input.classList.remove("error");
-  input.classList.add("success");
-  errorElement.style.display = "none";
-}
-
-// 🔄 Real-time validation (while typing)
-nameInput.addEventListener("input", validateName);
-emailInput.addEventListener("input", validateEmail);
-phoneInput.addEventListener("input", validatePhone);
-
-// 📩 On form submit
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const isNameValid = validateName();
-  const isEmailValid = validateEmail();
-  const isPhoneValid = validatePhone();
-
-  if (isNameValid && isEmailValid && isPhoneValid) {
-    alert("✅ Form submitted successfully!");
-    form.reset();
-
-    // Remove success borders after reset
-    nameInput.classList.remove("success");
-    emailInput.classList.remove("success");
-    phoneInput.classList.remove("success");
-  }
+    if (formIsValid) {
+        alert('Form submitted successfully!');
+    }
 });
